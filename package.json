@@ -21,7 +21,9 @@
   },
   "author": "Drew Kimberly",
   "license": "UNLICENSED",
-  "dependencies": {},
+  "dependencies": {
+    "js-yaml": "^3.13.1"
+  },
   "devDependencies": {
     "gts": "^2.0.0-alpha.9",
     "typescript": "~3.8.0",

@@ -19,9 +19,7 @@
   },
   "author": "Drew Kimberly",
   "license": "UNLICENSED",
-  "dependencies": {
-    "gts": "^2.0.0-alpha.9"
-  },
+  "dependencies": {},
   "devDependencies": {
     "gts": "^2.0.0-alpha.9",
     "typescript": "~3.8.0",

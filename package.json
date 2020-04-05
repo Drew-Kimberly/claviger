@@ -11,5 +11,8 @@
     "url": "git@gitlab.corp.redhat.com:akimberl/upkeep.git"
   },
   "author": "Drew Kimberly",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "gts": "^2.0.0-alpha.9"
+  }
 }

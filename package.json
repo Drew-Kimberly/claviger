@@ -11,7 +11,9 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check"
+    "posttest": "npm run check",
+    "start": "node build/index.js",
+    "watch": "tsc --watch"
   },
   "repository": {
     "type": "git",

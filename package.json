@@ -22,6 +22,7 @@
   "author": "Drew Kimberly",
   "license": "UNLICENSED",
   "dependencies": {
+    "glob": "^7.1.6",
     "js-yaml": "^3.13.1"
   },
   "devDependencies": {

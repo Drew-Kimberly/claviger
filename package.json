@@ -1,0 +1,15 @@
+{
+  "name": "@redhat/upkeep",
+  "version": "0.0.0",
+  "description": "Configurable reporting on repository dependencies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.corp.redhat.com:akimberl/upkeep.git"
+  },
+  "author": "Drew Kimberly",
+  "license": "UNLICENSED"
+}

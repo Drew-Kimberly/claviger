@@ -13,6 +13,7 @@
     "pretest": "npm run compile",
     "posttest": "npm run check",
     "start": "node build/index.js",
+    "validate": "node build/validate.js",
     "watch": "tsc --watch"
   },
   "repository": {

@@ -1,0 +1,16 @@
+name: "Red Hat Upkeep"
+
+gitRepository:
+  url: "https://gitlab.corp.redhat.com/akimberl/upkeep.git"
+  ref: "develop"
+
+packageManager: "npm"
+
+emails:
+  - "akimberl@redhat.com"
+
+securityAlert:
+  enabled: true
+
+dependencyReport:
+  enabled: true

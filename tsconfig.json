@@ -2,9 +2,12 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "build"
+    "outDir": "build",
+    "resolveJsonModule": true
   },
   "include": [
-    "index.ts"
+    "index.ts",
+    "validate.ts",
+    "src"
   ]
 }

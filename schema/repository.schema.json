@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "repository.schema.json",
+  "type": "object",
+  "title": "Repository JSON Schema",
+  "description": "Defines the schema for a repository config that enables integration with Upkeep.",
+  "required": [
+    "name",
+    "gitRepository",
+    "packageManager",
+    "emails",
+    "securityAlert",
+    "dependencyReport"
+  ],
+  "properties": {
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "The name of the repository"
+    },
+    "gitRepository": {
+      "$id": "#/properties/gitRepository",
+      "type": "object",
+      "title": "Represents a Git repository",
+      "required": [
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "$id": "#/properties/gitRepository/properties/url",
+          "type": "string",
+          "title": "Git Repo URL",
+          "description": "Must end in '.git'"
+        },
+        "ref": {
+          "$id": "#/properties/gitRepository/properties/ref",
+          "type": "string",
+          "title": "The Git branch/tag/commit to use",
+          "default": "master"
+        },
+        "isLernaMonorepo": {
+          "$id": "#/properties/gitRepository/properties/isLernaMonorepo",
+          "type": "boolean",
+          "title": "Is Lerna Monorepo?",
+          "description": "Whether or not the repository is a Lerna monorepo.",
+          "default": false
+        }
+      }
+    },
+    "packageManager": {
+      "$id": "#/properties/packageManager",
+      "type": "string",
+      "title": "Package Manager",
+      "description": "The package manager component used for the repository",
+      "enum": [
+        "npm"
+      ]
+    },
+    "emails": {
+      "$id": "#/properties/emails",
+      "type": "array",
+      "title": "Email Addresses",
+      "description": "The list of emails to deliver the alerts/reports to for the repository",
+      "minLength": 1,
+      "items": {
+        "$id": "#/properties/emails/items",
+        "type": "string",
+        "title": "Email Address"
+      }
+    },
+    "securityAlert": {
+      "$id": "#/properties/securityAlert",
+      "type": "object",
+      "title": "Security Alert",
+      "description": "Configuration for security alerts",
+      "required": [
+        "enabled"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/securityAlert/properties/enabled",
+          "type": "boolean",
+          "title": "Whether the repository opts in to security alerts"
+        },
+        "minSeverity": {
+          "$id": "#/properties/securityAlert/properties/minSeverity",
+          "type": "string",
+          "title": "Minimum Vulnerability Severity",
+          "description": "The minimum severity required to trigger the alert.",
+          "enum": [
+            "info",
+            "low",
+            "moderate",
+            "high",
+            "critical"
+          ],
+          "default": "high"
+        }
+      }
+    },
+    "dependencyReport": {
+      "$id": "#/properties/dependencyReport",
+      "type": "object",
+      "title": "Dependency Report",
+      "description": "Defines available configuration for dependency reports.",
+      "required": [
+        "enabled"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "$id": "#/properties/dependencyReport/properties/enabled",
+          "type": "boolean",
+          "title": "Enabled",
+          "description": "Whether the repository opts in to dependency reports"
+        },
+        "includeSecurityOverview": {
+          "$id": "#/properties/dependencyReport/properties/includeSecurityReport",
+          "type": "boolean",
+          "title": "Include Security Report",
+          "description": "Whether or not to include a security overview within the report",
+          "default": true
+        }
+      }
+    }
+  }
+}

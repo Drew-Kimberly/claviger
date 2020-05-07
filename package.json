@@ -1,0 +1,37 @@
+{
+  "name": "@drewkimberly/upkeep",
+  "version": "0.0.0",
+  "description": "Configurable reporting on repository dependencies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "npm run clean && tsc && cp -r ./repositories build",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check",
+    "start": "node build/index.js",
+    "validate": "node build/validate.js",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Drew-Kimberly/upkeep.git"
+  },
+  "author": "Drew Kimberly",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.1.6",
+    "js-yaml": "^3.13.1"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/js-yaml": "^3.12.3",
+    "@types/node": "^10.0.3",
+    "ajv": "^6.12.0",
+    "gts": "^2.0.0-alpha.9",
+    "typescript": "~3.8.0"
+  }
+}

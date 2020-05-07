@@ -1,9 +1,11 @@
 import * as path from 'path';
 import {exec} from 'child_process';
 import {getRepositories} from './src/repository';
+import {loggerFactory} from './src/logger';
 
 // Security alert.
 (async () => {
+  const logger = loggerFactory.createLogger('testing');
   const definitionsPath = path.join(__dirname, 'repositories');
   const repositories = await getRepositories(definitionsPath);
 
@@ -16,10 +18,11 @@ import {getRepositories} from './src/repository';
           throw error;
         }
         if (stderr) {
-          console.log(stderr);
+          logger.info(stderr);
         }
-
-        console.log(stdout);
+        if (stdout) {
+          logger.info(stdout);
+        }
 
         if (repo.isSecurityAlertEnabled()) {
           exec('npm audit --json', (err, stdout) => {

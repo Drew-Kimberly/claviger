@@ -1,5 +1,5 @@
 {
-  "name": "@redhat/upkeep",
+  "name": "@drewkimberly/upkeep",
   "version": "0.0.0",
   "description": "Configurable reporting on repository dependencies",
   "main": "index.js",
@@ -18,10 +18,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.corp.redhat.com:akimberl/upkeep.git"
+    "url": "git@github.com:Drew-Kimberly/upkeep.git"
   },
   "author": "Drew Kimberly",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "glob": "^7.1.6",
     "js-yaml": "^3.13.1"

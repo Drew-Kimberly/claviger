@@ -1,21 +1,16 @@
 import * as path from 'path';
 import {exec} from 'child_process';
-import {
-  getRepositoryDefinitions,
-  RepositoryDefinition,
-} from './src/repository-definition';
+import {getRepositories} from './src/repository';
 
 // Security alert.
 (async () => {
   const definitionsPath = path.join(__dirname, 'repositories');
-  const definitions: RepositoryDefinition[] = await getRepositoryDefinitions(
-    definitionsPath
-  );
+  const repositories = await getRepositories(definitionsPath);
 
-  for (const definition of definitions) {
-    const clonedRepo = path.join(__dirname, `gitRepos/${definition.id}`);
+  for (const repo of repositories) {
+    const clonedRepoDestination = path.join(__dirname, `gitRepos/${repo.id()}`);
     exec(
-      `git clone --depth=1 ${definition.gitRepository.url} ${clonedRepo} -b ${definition.gitRepository.ref} && cd ${clonedRepo}`,
+      `${repo.cloneCmd(clonedRepoDestination)} && cd ${clonedRepoDestination}`,
       (error, stdout, stderr) => {
         if (error) {
           throw error;
@@ -26,14 +21,14 @@ import {
 
         console.log(stdout);
 
-        if (definition.securityAlert.enabled) {
+        if (repo.isSecurityAlertEnabled()) {
           exec('npm audit --json', (err, stdout) => {
             if (err) {
               throw err;
             }
 
             const auditResults = JSON.parse(stdout);
-            console.log(`Results for ${definition.name}:`, auditResults);
+            console.log(`Results for ${repo.name()}:`, auditResults);
           });
         }
       }

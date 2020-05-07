@@ -19,13 +19,13 @@ export interface RepositoryDefinition {
   emails: string[];
   securityAlert: SecurityAlert;
   dependencyReport: DependencyReport;
-  repositoryConfigPath: string;
+  repositoryDefinitionPath: string;
 }
 
 export interface GitRepo {
   url: string;
   ref?: string;
-  isLernaMonorepo?: boolean;
+  isMonorepo?: boolean;
 }
 
 export interface SecurityAlert {

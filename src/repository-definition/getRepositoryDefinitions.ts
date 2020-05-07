@@ -1,6 +1,7 @@
 import {RepositoryDefinition} from './types';
 import * as glob from 'glob';
 import {getRepositoryDefinitionByPath} from './getRepositoryDefinitionByPath';
+import {isDefined} from '../util';
 
 export const getRepositoryDefinitions = (
   path: string
@@ -15,7 +16,12 @@ export const getRepositoryDefinitions = (
         reject(err);
       }
 
-      resolve(Promise.all(matches.map(getRepositoryDefinitionByPath)));
+      const definitions =
+        Promise.all(
+          matches.map(getRepositoryDefinitionByPath).filter(isDefined)
+        ) as Promise<RepositoryDefinition[]>;
+
+      resolve(definitions);
     });
   });
 };

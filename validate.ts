@@ -13,10 +13,10 @@ import {RepositoryDefinition} from './src/repository-definition';
 
   const validations = repositories.map((repo: RepositoryDefinition) => {
     return new Promise((resolve, reject) => {
-      if (!validateRepositoryName(repo.repositoryConfigPath)) {
+      if (!validateRepositoryName(repo.repositoryDefinitionPath)) {
         return reject(
           new Error(
-            `Invalid repository path ${repo.repositoryConfigPath}! Repository config files should be of the form /path/to/upkeep/repositories/custom/path/{{repoId}}.repository.yml`
+            `Invalid repository path ${repo.repositoryDefinitionPath}! Repository config files should be of the form /path/to/upkeep/repositories/custom/path/{{repoId}}.repository.yml`
           )
         );
       }
@@ -26,7 +26,7 @@ import {RepositoryDefinition} from './src/repository-definition';
           errors.forEach(error => console.error('Validation error:', error));
           return reject(
             new Error(
-              `Repository ${repo.id} found at path ${repo.repositoryConfigPath} failed Upkeep Repository schema validation.`
+              `Repository ${repo.id} found at path ${repo.repositoryDefinitionPath} failed Upkeep Repository schema validation.`
             )
           );
         }

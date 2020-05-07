@@ -12,7 +12,7 @@ export const getRepositoryDefinitionDefaults = (): Partial<
   gitRepository:
     {
       ref: 'master',
-      isLernaMonorepo: false,
+      isMonorepo: false,
     } as GitRepo,
   securityAlert:
     {

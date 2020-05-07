@@ -39,8 +39,8 @@
           "title": "The Git branch/tag/commit to use",
           "default": "master"
         },
-        "isLernaMonorepo": {
-          "$id": "#/properties/gitRepository/properties/isLernaMonorepo",
+        "isMonorepo": {
+          "$id": "#/properties/gitRepository/properties/isMonorepo",
           "type": "boolean",
           "title": "Is Lerna Monorepo?",
           "description": "Whether or not the repository is a Lerna monorepo.",

@@ -11,29 +11,29 @@ export enum SecurityVulnerabilitySeverities {
 }
 
 // See: /path/to/upkeep/schema/repository.schema.json
-export interface UpkeepRepository {
+export interface RepositoryDefinition {
   id: string;
   name: string;
-  gitRepository: UpkeepGitRepo;
+  gitRepository: GitRepo;
   packageManager: PackageManagers;
   emails: string[];
-  securityAlert: UpkeepSecurityAlert;
-  dependencyReport: UpkeepDependencyReport;
+  securityAlert: SecurityAlert;
+  dependencyReport: DependencyReport;
   repositoryConfigPath: string;
 }
 
-export interface UpkeepGitRepo {
+export interface GitRepo {
   url: string;
   ref?: string;
   isLernaMonorepo?: boolean;
 }
 
-export interface UpkeepSecurityAlert {
+export interface SecurityAlert {
   enabled: boolean;
   minSeverity?: SecurityVulnerabilitySeverities;
 }
 
-export interface UpkeepDependencyReport {
+export interface DependencyReport {
   enabled: boolean;
   includeSecurityOverview?: boolean;
 }

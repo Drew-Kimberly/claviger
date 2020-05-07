@@ -1,16 +1,21 @@
 import * as path from 'path';
 import {exec} from 'child_process';
-import {getUpkeepRepositories} from './src/repository';
+import {
+  getRepositoryDefinitions,
+  RepositoryDefinition,
+} from './src/repository-definition';
 
 // Security alert.
 (async () => {
-  const configPath = path.join(__dirname, 'repositories');
-  const configs = await getUpkeepRepositories(configPath);
+  const definitionsPath = path.join(__dirname, 'repositories');
+  const definitions: RepositoryDefinition[] = await getRepositoryDefinitions(
+    definitionsPath
+  );
 
-  configs.forEach(config => {
-    const clonedRepo = path.join(__dirname, `gitRepos/${config.id}`);
+  for (const definition of definitions) {
+    const clonedRepo = path.join(__dirname, `gitRepos/${definition.id}`);
     exec(
-      `git clone --depth=1 ${config.gitRepository.url} ${clonedRepo} -b ${config.gitRepository.ref} && cd ${clonedRepo}`,
+      `git clone --depth=1 ${definition.gitRepository.url} ${clonedRepo} -b ${definition.gitRepository.ref} && cd ${clonedRepo}`,
       (error, stdout, stderr) => {
         if (error) {
           throw error;
@@ -21,19 +26,19 @@ import {getUpkeepRepositories} from './src/repository';
 
         console.log(stdout);
 
-        if (config.securityAlert.enabled) {
+        if (definition.securityAlert.enabled) {
           exec('npm audit --json', (err, stdout) => {
             if (err) {
               throw err;
             }
 
             const auditResults = JSON.parse(stdout);
-            console.log(`Results for ${config.name}:`, auditResults);
+            console.log(`Results for ${definition.name}:`, auditResults);
           });
         }
       }
     );
-  });
+  }
 })();
 
 export * from './src';

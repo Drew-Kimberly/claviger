@@ -7,11 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "npm run clean && tsc && cp -r ./repositories build",
+    "compile": "npm run clean && tsc && cp -r ./repositories build && npm run validate",
     "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run check",
     "start": "node build/index.js",
     "validate": "node build/validate.js",
     "watch": "tsc --watch"

@@ -1,17 +1,17 @@
 import * as path from 'path';
 import {
   validateRepositoryName,
-  validateRepositoryConfig,
-} from './src/repository/validation';
-import {getUpkeepRepositories} from './src/repository';
-import {UpkeepRepository} from './src/repository';
+  validateRepositoryDefinition,
+} from './src/repository-definition/validation';
+import {getRepositoryDefinitions} from './src/repository-definition';
+import {RepositoryDefinition} from './src/repository-definition';
 
 (async () => {
-  const repositories = await getUpkeepRepositories(
+  const repositories = await getRepositoryDefinitions(
     path.join(__dirname, 'repositories')
   );
 
-  const validations = repositories.map((repo: UpkeepRepository) => {
+  const validations = repositories.map((repo: RepositoryDefinition) => {
     return new Promise((resolve, reject) => {
       if (!validateRepositoryName(repo.repositoryConfigPath)) {
         return reject(
@@ -21,7 +21,7 @@ import {UpkeepRepository} from './src/repository';
         );
       }
 
-      validateRepositoryConfig(repo).then(errors => {
+      validateRepositoryDefinition(repo).then(errors => {
         if (errors.length > 0) {
           errors.forEach(error => console.error('Validation error:', error));
           return reject(

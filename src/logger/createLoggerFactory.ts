@@ -7,11 +7,12 @@ import {
   LogWriter,
 } from './types';
 import {createLogger} from './createLogger';
+import {EventEmitter} from 'events';
 
 export const createLoggerFactory = (
-  eventEmitter: IEmitter,
   logWriter: LogWriter<any>,
-  logFormatter: LogFormatter
+  logFormatter: LogFormatter,
+  eventEmitter: IEmitter = new EventEmitter()
 ): ILoggerFactory => {
   const curriedLogWriter = (loggable: ILoggable) =>
     logWriter(loggable, logFormatter);

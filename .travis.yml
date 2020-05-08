@@ -1,8 +1,6 @@
 language: node_js
 node_js:
-  - 10
   - 12
-  - 14
 
 cache:
   directories:
@@ -21,7 +19,7 @@ stages:
 jobs:
   include:
     - stage: compile
-      script: npm run build
+      script: npm run compile
 
     - stage: check
       script: npm run check

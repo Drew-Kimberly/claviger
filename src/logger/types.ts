@@ -56,5 +56,5 @@ export type LogFormatter<T = string> = (loggable: ILoggable) => T;
 
 export type LogWriter = (
   loggable: ILoggable,
-  formatter: LogFormatter
+  formatter: LogFormatter<any>
 ) => Promise<void>;

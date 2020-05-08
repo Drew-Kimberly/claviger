@@ -52,9 +52,9 @@ export type LogChannelFactory = Factory<LogChannelName, ILogChannel>;
 
 export type Logger = ILogChannel;
 
-export type LogFormatter = (loggable: ILoggable) => string;
+export type LogFormatter<T = string> = (loggable: ILoggable) => T;
 
-export type LogWriter<T> = (
+export type LogWriter = (
   loggable: ILoggable,
   formatter: LogFormatter
-) => Promise<T>;
+) => Promise<void>;

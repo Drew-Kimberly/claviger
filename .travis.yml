@@ -13,6 +13,11 @@ notifications:
     - recipients:
         - andrew.e.kimberly@gmail.com
 
+stages:
+  - compile
+  - check
+  - test
+
 jobs:
   include:
     - stage: compile
@@ -22,4 +27,4 @@ jobs:
       script: npm run check
 
     - stage: test
-      script: npm run test
+      script: npm run test:coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage

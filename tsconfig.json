@@ -10,5 +10,9 @@
     "index.ts",
     "validate.ts",
     "src"
+  ],
+  "exclude": [
+    "src/**/__tests__",
+    "build"
   ]
 }

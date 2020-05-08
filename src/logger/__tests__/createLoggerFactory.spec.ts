@@ -19,11 +19,7 @@ describe('Test suite for createLoggerFactory', () => {
     assertion(e, handler);
 
   test('createLoggerFactory returns an object with a createLogger method', () => {
-    const loggerFactory = createLoggerFactory(
-      mockLogWriter,
-      mockLogFormatter,
-      createMockEventEmitter()
-    );
+    const loggerFactory = createLoggerFactory(mockLogWriter, mockLogFormatter);
 
     expect(loggerFactory.createLogger).toBeTruthy();
   });

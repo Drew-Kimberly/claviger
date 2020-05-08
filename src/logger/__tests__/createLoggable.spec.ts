@@ -12,7 +12,7 @@ describe('Test suite for createLoggable', () => {
   beforeEach(() => (Date.now = jest.fn(() => NOW)));
   afterEach(() => (Date.now = dateNowFn));
 
-  test('createLoggable returns a an ILoggable object', () => {
+  test('createLoggable returns an ILoggable object', () => {
     const expected: ILoggable = {
       severity: LogSeverity.ERROR,
       channel: channelName,
@@ -24,5 +24,17 @@ describe('Test suite for createLoggable', () => {
     expect(createLoggable(severity, channelName, message, context)).toEqual(
       expected
     );
+  });
+
+  test('An empty array is populated for context by default on the ILoggable object', () => {
+    const expected: ILoggable = {
+      severity: LogSeverity.ERROR,
+      channel: channelName,
+      timestamp: NOW,
+      message: message,
+      context: [],
+    };
+
+    expect(createLoggable(severity, channelName, message)).toEqual(expected);
   });
 });

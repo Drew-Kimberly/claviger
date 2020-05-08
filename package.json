@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "npm run clean && tsc && cp -r ./repositories build && npm run validate",

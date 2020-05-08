@@ -1,4 +1,9 @@
-import {PackageManagers, RepositoryDefinition, SecurityVulnerabilitySeverities} from '../repository-definition';
+import {
+  PackageManagers,
+  RepositoryDefinition,
+  SecurityVulnerabilitySeverities,
+} from '../repository-definition';
+import {Factory} from '../util';
 
 export interface IRepository extends ICloneable, IDirectory {
   getDefinition(): RepositoryDefinition;
@@ -26,4 +31,3 @@ export type GitCloneExecutor = (cloneable: ICloneable) => Promise<IDirectory>;
 export type ChangeDirectoryExecutor = (
   directory: IDirectory
 ) => Promise<IDirectory>;
-export type Factory<T, V> = (input: T) => V;

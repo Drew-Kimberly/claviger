@@ -24,6 +24,7 @@ export interface ILoggable<S extends LogSeverity = LogSeverity> {
   channel: LogChannelName;
   timestamp: number;
   message: string;
+  context: any[];
 }
 
 export interface ILogChannel {
@@ -41,7 +42,8 @@ export interface IEmitter {
 }
 
 export type LogChannelHandler<S extends LogSeverity = LogSeverity> = (
-  message: string
+  message: string,
+  ...context: any[]
 ) => ILoggable<S>;
 
 export type LogChannelName = string;

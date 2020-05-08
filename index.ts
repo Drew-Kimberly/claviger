@@ -31,7 +31,7 @@ import {loggerFactory} from './src/logger';
             }
 
             const auditResults = JSON.parse(stdout);
-            console.log(`Results for ${repo.name()}:`, auditResults);
+            logger.info(`Results for ${repo.name()}:`, auditResults);
           });
         }
       }

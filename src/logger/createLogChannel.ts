@@ -4,25 +4,51 @@ import {createLoggable} from './createLoggable';
 export const createLogChannel: LogChannelFactory = (
   channel: LogChannelName
 ) => ({
-  debug: message =>
-    createLoggable<LogSeverity.DEBUG>(LogSeverity.DEBUG, channel, message),
+  debug: (message, ...context) =>
+    createLoggable<LogSeverity.DEBUG>(
+      LogSeverity.DEBUG,
+      channel,
+      message,
+      context
+    ),
 
-  info: message =>
-    createLoggable<LogSeverity.INFO>(LogSeverity.INFO, channel, message),
+  info: (message, ...context) =>
+    createLoggable<LogSeverity.INFO>(
+      LogSeverity.INFO,
+      channel,
+      message,
+      context
+    ),
 
-  notice: message =>
-    createLoggable<LogSeverity.NOTICE>(LogSeverity.NOTICE, channel, message),
+  notice: (message, ...context) =>
+    createLoggable<LogSeverity.NOTICE>(
+      LogSeverity.NOTICE,
+      channel,
+      message,
+      context
+    ),
 
-  warning: message =>
-    createLoggable<LogSeverity.WARNING>(LogSeverity.WARNING, channel, message),
+  warning: (message, ...context) =>
+    createLoggable<LogSeverity.WARNING>(
+      LogSeverity.WARNING,
+      channel,
+      message,
+      context
+    ),
 
-  error: message =>
-    createLoggable<LogSeverity.ERROR>(LogSeverity.ERROR, channel, message),
+  error: (message, ...context) =>
+    createLoggable<LogSeverity.ERROR>(
+      LogSeverity.ERROR,
+      channel,
+      message,
+      context
+    ),
 
-  critical: message =>
+  critical: (message, ...context) =>
     createLoggable<LogSeverity.CRITICAL>(
       LogSeverity.CRITICAL,
       channel,
-      message
+      message,
+      context
     ),
 });

@@ -37,9 +37,15 @@ export interface ILogChannel {
 }
 
 export interface IEmitter {
-  emit: (event: LogEvents, loggable: ILoggable) => void;
-  on: (event: LogEvents, handler: (loggable: ILoggable) => void) => void;
+  emit: EventEmitHandler;
+  on: EventListener;
 }
+export type EventEmitHandler = (event: LogEvents, loggable: ILoggable) => void;
+export type EventListenerHandler = (loggable: ILoggable) => void;
+export type EventListener = (
+  event: LogEvents,
+  handler: EventListenerHandler
+) => void;
 
 export type LogChannelHandler<S extends LogSeverity = LogSeverity> = (
   message: string,

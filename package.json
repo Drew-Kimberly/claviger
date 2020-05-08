@@ -3,15 +3,17 @@
   "version": "0.0.0",
   "description": "Configurable reporting on repository dependencies",
   "main": "index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "npm run clean && tsc && cp -r ./repositories build",
+    "compile": "npm run clean && tsc && cp -r ./repositories build && npm run validate",
     "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run check",
     "start": "node build/index.js",
     "validate": "node build/validate.js",
     "watch": "tsc --watch"
@@ -28,10 +30,15 @@
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
+    "@types/jest": "^25.2.1",
     "@types/js-yaml": "^3.12.3",
     "@types/node": "^10.0.3",
     "ajv": "^6.12.0",
+    "coveralls": "^3.1.0",
+    "eslint-plugin-jest": "^23.9.0",
     "gts": "^2.0.0-alpha.9",
+    "jest": "^25.5.4",
+    "ts-jest": "^25.5.0",
     "typescript": "~3.8.0"
   }
 }

@@ -1,39 +1,42 @@
 import * as path from 'path';
 import {exec} from 'child_process';
-import {getUpkeepRepositories} from './src/repository';
+import {getRepositories} from './src/repository';
+import {loggerFactory} from './src/logger';
 
 // Security alert.
 (async () => {
-  const configPath = path.join(__dirname, 'repositories');
-  const configs = await getUpkeepRepositories(configPath);
+  const logger = loggerFactory.createLogger();
+  const definitionsPath = path.join(__dirname, 'repositories');
+  const repositories = await getRepositories(definitionsPath);
 
-  configs.forEach(config => {
-    const clonedRepo = path.join(__dirname, `gitRepos/${config.id}`);
+  for (const repo of repositories) {
+    const clonedRepoDestination = path.join(__dirname, `gitRepos/${repo.id()}`);
     exec(
-      `git clone --depth=1 ${config.gitRepository.url} ${clonedRepo} -b ${config.gitRepository.ref} && cd ${clonedRepo}`,
+      `${repo.cloneCmd(clonedRepoDestination)} && cd ${clonedRepoDestination}`,
       (error, stdout, stderr) => {
         if (error) {
           throw error;
         }
         if (stderr) {
-          console.log(stderr);
+          logger.info(stderr);
+        }
+        if (stdout) {
+          logger.info(stdout);
         }
 
-        console.log(stdout);
-
-        if (config.securityAlert.enabled) {
+        if (repo.isSecurityAlertEnabled()) {
           exec('npm audit --json', (err, stdout) => {
             if (err) {
               throw err;
             }
 
             const auditResults = JSON.parse(stdout);
-            console.log(`Results for ${config.name}:`, auditResults);
+            logger.info(`Results for ${repo.name()}:`, auditResults);
           });
         }
       }
     );
-  });
+  }
 })();
 
 export * from './src';

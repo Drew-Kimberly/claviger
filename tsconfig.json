@@ -3,11 +3,18 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noImplicitAny": false
   },
   "include": [
     "index.ts",
     "validate.ts",
     "src"
+  ],
+  "exclude": [
+    "src/**/__tests__",
+    "src/**/__mocks__",
+    "src/**/__fixtures__",
+    "build"
   ]
 }

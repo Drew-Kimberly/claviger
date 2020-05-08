@@ -1,32 +1,32 @@
 import * as path from 'path';
 import {
   validateRepositoryName,
-  validateRepositoryConfig,
-} from './src/repository/validation';
-import {getUpkeepRepositories} from './src/repository';
-import {UpkeepRepository} from './src/repository';
+  validateRepositoryDefinition,
+} from './src/repository-definition/validation';
+import {getRepositoryDefinitions} from './src/repository-definition';
+import {RepositoryDefinition} from './src/repository-definition';
 
 (async () => {
-  const repositories = await getUpkeepRepositories(
+  const repositories = await getRepositoryDefinitions(
     path.join(__dirname, 'repositories')
   );
 
-  const validations = repositories.map((repo: UpkeepRepository) => {
+  const validations = repositories.map((repo: RepositoryDefinition) => {
     return new Promise((resolve, reject) => {
-      if (!validateRepositoryName(repo.repositoryConfigPath)) {
+      if (!validateRepositoryName(repo.repositoryDefinitionPath)) {
         return reject(
           new Error(
-            `Invalid repository path ${repo.repositoryConfigPath}! Repository config files should be of the form /path/to/upkeep/repositories/custom/path/{{repoId}}.repository.yml`
+            `Invalid repository path ${repo.repositoryDefinitionPath}! Repository config files should be of the form /path/to/upkeep/repositories/custom/path/{{repoId}}.repository.yml`
           )
         );
       }
 
-      validateRepositoryConfig(repo).then(errors => {
+      validateRepositoryDefinition(repo).then(errors => {
         if (errors.length > 0) {
           errors.forEach(error => console.error('Validation error:', error));
           return reject(
             new Error(
-              `Repository ${repo.id} found at path ${repo.repositoryConfigPath} failed Upkeep Repository schema validation.`
+              `Repository ${repo.id} found at path ${repo.repositoryDefinitionPath} failed Upkeep Repository schema validation.`
             )
           );
         }

@@ -1,4 +1,4 @@
-import {Factory, Maybe} from '../util';
+import {Factory} from '../util';
 
 export enum LogSeverity {
   DEBUG = 'DEBUG',
@@ -13,8 +13,10 @@ export enum LogEvents {
   MESSAGE_LOGGED = 'message_logged',
 }
 
+export const DEFAULT_LOG_CHANNEL = 'default';
+
 export interface ILoggerFactory {
-  createLogger: (channel: LogChannelName) => Logger;
+  createLogger: (channel?: LogChannelName) => Logger;
 }
 
 export interface ILoggable<S extends LogSeverity = LogSeverity> {
@@ -33,13 +35,23 @@ export interface ILogChannel {
   critical: LogChannelHandler<LogSeverity.CRITICAL>;
 }
 
+export interface IEmitter {
+  emit: (event: LogEvents, loggable: ILoggable) => void;
+  on: (event: LogEvents, handler: (loggable: ILoggable) => void) => void;
+}
+
 export type LogChannelHandler<S extends LogSeverity = LogSeverity> = (
   message: string
 ) => ILoggable<S>;
-export type LogChannelName = Maybe<string>;
+
+export type LogChannelName = string;
+
 export type LogChannelFactory = Factory<LogChannelName, ILogChannel>;
+
 export type Logger = ILogChannel;
+
 export type LogFormatter = (loggable: ILoggable) => string;
+
 export type LogWriter<T> = (
   loggable: ILoggable,
   formatter: LogFormatter

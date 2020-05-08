@@ -1,15 +1,15 @@
 import {
+  IEmitter,
   ILoggable,
   ILoggerFactory,
   LogEvents,
   LogFormatter,
   LogWriter,
 } from './types';
-import {EventEmitter} from 'events';
 import {createLogger} from './createLogger';
 
 export const createLoggerFactory = (
-  eventEmitter: EventEmitter,
+  eventEmitter: IEmitter,
   logWriter: LogWriter<any>,
   logFormatter: LogFormatter
 ): ILoggerFactory => {

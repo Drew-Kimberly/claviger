@@ -2,7 +2,7 @@ import {LogChannelName, LogChannelFactory, LogSeverity} from './types';
 import {createLoggable} from './createLoggable';
 
 export const createLogChannel: LogChannelFactory = (
-  channel: LogChannelName = undefined
+  channel: LogChannelName
 ) => ({
   debug: message =>
     createLoggable<LogSeverity.DEBUG>(LogSeverity.DEBUG, channel, message),

@@ -6,7 +6,7 @@ export const createLoggable = <S extends LogSeverity>(
   message: string
 ): ILoggable<S> => ({
   severity: severity,
-  channel: channel ?? '',
+  channel: channel,
   timestamp: Date.now(),
   message: message,
 });

@@ -1,10 +1,16 @@
-import {ILogChannel, LogChannelName, Logger, LogSeverity} from './types';
+import {
+  DEFAULT_LOG_CHANNEL,
+  IEmitter,
+  ILogChannel,
+  LogChannelName,
+  Logger,
+  LogSeverity,
+} from './types';
 import {createLogChannel} from './createLogChannel';
 import {logWithEvent} from './logWithEvent';
-import {EventEmitter} from 'events';
 
-export const createLogger = (emitter: EventEmitter) => (
-  channel: LogChannelName
+export const createLogger = (emitter: IEmitter) => (
+  channel: LogChannelName = DEFAULT_LOG_CHANNEL
 ): Logger => {
   const logChannel: ILogChannel = createLogChannel(channel);
 

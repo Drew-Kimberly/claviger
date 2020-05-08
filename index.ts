@@ -5,7 +5,7 @@ import {loggerFactory} from './src/logger';
 
 // Security alert.
 (async () => {
-  const logger = loggerFactory.createLogger('testing');
+  const logger = loggerFactory.createLogger();
   const definitionsPath = path.join(__dirname, 'repositories');
   const repositories = await getRepositories(definitionsPath);
 

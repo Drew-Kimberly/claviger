@@ -1,18 +1,24 @@
-import {ExecutableFactory, OutputHandler} from './types';
+import {
+  Executable,
+  ExecutableFactory,
+  Executor,
+  OutputHandler,
+  ProcessSpawner,
+} from './types';
 import {spawn} from 'child_process';
 import {execute} from './execute';
-import {forwardKillSignals} from './forwardKillSignal';
+import {withForwardedKillSignals} from './withForwardedKillSignals';
 
 const nullOutputHandler: OutputHandler = (output: string) => {};
 
 export const createExecutable: ExecutableFactory = (
   cmd: string,
-  onOutput: OutputHandler = nullOutputHandler
-) => {
+  onOutput: OutputHandler = nullOutputHandler,
+  executor: Executor = execute,
+  spawnProcess: ProcessSpawner = spawn
+): Executable => {
   return (args = []) => {
-    const childProc = spawn(cmd, args, {shell: true});
-    forwardKillSignals(process, childProc);
-
-    return execute(childProc, onOutput);
+    const childProc = spawnProcess(cmd, args, {shell: true});
+    return withForwardedKillSignals(process, childProc, executor)(onOutput);
   };
 };

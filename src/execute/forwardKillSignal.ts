@@ -6,7 +6,7 @@ import Process = NodeJS.Process;
 export const forwardKillSignals = (
   sourceProc: Process,
   destProc: ChildProcess
-) =>
+): void =>
   Object.values(KillSignals).forEach(signal =>
     sourceProc.on(signal, () => destProc.kill(signal))
   );

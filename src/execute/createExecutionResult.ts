@@ -2,8 +2,8 @@ import {ExecutionStatus} from './types';
 
 export const createExecutionResult = (
   output: string,
-  code: number,
-  signal: string
+  code: number | null,
+  signal: string | null
 ) => {
   return code === 0
     ? {status: ExecutionStatus.Success, code: code, output: output}

@@ -3,9 +3,9 @@ import {
   RepositoryDefinition,
   SecurityVulnerabilitySeverities,
 } from '../repository-definition';
-import {Factory} from '../util';
+import {ICloneable} from '../git';
 
-export interface IRepository extends ICloneable, IDirectory {
+export interface IRepository extends ICloneable {
   getDefinition(): RepositoryDefinition;
   id(): string;
   name(): string;
@@ -18,16 +18,7 @@ export interface IRepository extends ICloneable, IDirectory {
   includeSecurityOverviewInDependencyReport(): boolean;
 }
 
-export interface ICloneable {
-  cloneCmd(destination: string): string;
-}
-
-export interface IDirectory {
-  path(): string;
-}
-
-export type RepositoryFactory = Factory<RepositoryDefinition, IRepository>;
-export type GitCloneExecutor = (cloneable: ICloneable) => Promise<IDirectory>;
-export type ChangeDirectoryExecutor = (
-  directory: IDirectory
-) => Promise<IDirectory>;
+export type RepositoryFactory = (
+  definition: RepositoryDefinition,
+  destination: string
+) => IRepository;

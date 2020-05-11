@@ -4,8 +4,12 @@ import {
   SecurityVulnerabilitySeverities,
 } from '../repository-definition';
 
+const DEFAULT_BRANCH = 'master';
+const CLONE_DEPTH = 1;
+
 export const createRepository: RepositoryFactory = (
-  definition: RepositoryDefinition
+  definition: RepositoryDefinition,
+  destination: string
 ): IRepository => {
   return {
     getDefinition: () => definition,
@@ -31,9 +35,12 @@ export const createRepository: RepositoryFactory = (
     includeSecurityOverviewInDependencyReport: () =>
       Boolean(definition.dependencyReport.includeSecurityOverview),
 
-    cloneCmd: (destination: string) =>
-      `git clone --depth=1 ${definition.gitRepository.url} ${destination} -b ${definition.gitRepository.ref}`,
+    gitUrl: () => definition.gitRepository.url,
 
-    path: () => definition.repositoryDefinitionPath,
+    gitBranch: () => definition.gitRepository.ref ?? DEFAULT_BRANCH,
+
+    cloneDepth: () => CLONE_DEPTH,
+
+    cloneDestination: () => `${destination}${definition.id}`,
   };
 };

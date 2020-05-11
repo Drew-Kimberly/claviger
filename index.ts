@@ -7,30 +7,24 @@ import {
   IExecutionResult,
   isExecutionSuccessful,
 } from './src/execute';
+import {createGitService, IGit} from './src/git';
 
 // Security alert.
 (async () => {
   const logger = loggerFactory.createLogger();
+  const git: IGit = createGitService(createExecutable, loggerFactory);
+
   const definitionsPath = path.join(__dirname, 'repositories');
-  const repositories = await getRepositories(definitionsPath);
+  const destinationPath = path.join(__dirname, 'gitRepos/');
+  const repositories = await getRepositories(definitionsPath, destinationPath);
 
   for (const repo of repositories) {
-    const clonedRepoDestination = path.join(__dirname, `gitRepos/${repo.id()}`);
-    const cmd = `${repo.cloneCmd(clonedRepoDestination)}`;
-
-    const clone: Executable = createExecutable(cmd, logger.info);
-    const cloneResult = await clone();
-    if (!isExecutionSuccessful(cloneResult)) {
-      logger.error(
-        `Failed cloning ${repo.name()} to ${clonedRepoDestination}`,
-        cloneResult.error,
-        cloneResult.output
-      );
+    if (!(await git.clone(repo))) {
       continue;
     }
 
     if (repo.isSecurityAlertEnabled()) {
-      const auditCmd = `cd ${clonedRepoDestination} && npm audit --json`;
+      const auditCmd = `cd ${repo.cloneDestination()} && npm audit --json`;
       const audit: Executable = createExecutable(auditCmd);
       const auditResult: IExecutionResult = await audit();
 

@@ -24,6 +24,11 @@ describe('Test suite for createLoggerFactory', () => {
     expect(loggerFactory.createLogger).toBeTruthy();
   });
 
+  test('createLoggerFactory uses default writer/formatter functions', () => {
+    const loggerFactory = createLoggerFactory();
+    expect(loggerFactory.createLogger).toBeTruthy();
+  });
+
   test('createLoggerFactory registers a MESSAGE_LOGGED event listener', () => {
     const assertion: EventListener = (
       e: LogEvents,

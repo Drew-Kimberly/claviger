@@ -1,5 +1,3 @@
-import {IExecutionResult} from '../execute';
-
 export interface ICloneable {
   gitUrl(): string;
   gitBranch(): string;
@@ -10,7 +8,3 @@ export interface ICloneable {
 export interface IGit {
   clone(repo: ICloneable): Promise<boolean>;
 }
-
-export type GitCloneExecutable = (
-  destination: string
-) => Promise<IExecutionResult>;

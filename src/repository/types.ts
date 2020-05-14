@@ -19,6 +19,5 @@ export interface IRepository extends ICloneable {
 }
 
 export type RepositoryFactory = (
-  definition: RepositoryDefinition,
-  destination: string
+  definition: RepositoryDefinition
 ) => IRepository;

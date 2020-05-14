@@ -8,8 +8,7 @@ const DEFAULT_BRANCH = 'master';
 const CLONE_DEPTH = 1;
 
 export const createRepository: RepositoryFactory = (
-  definition: RepositoryDefinition,
-  destination: string
+  definition: RepositoryDefinition
 ): IRepository => {
   return {
     getDefinition: () => definition,
@@ -41,6 +40,6 @@ export const createRepository: RepositoryFactory = (
 
     cloneDepth: () => CLONE_DEPTH,
 
-    cloneDestination: () => `${destination}${definition.id}`,
+    cloneDestination: () => '',
   };
 };

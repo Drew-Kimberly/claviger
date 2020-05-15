@@ -1,5 +1,5 @@
 import {createSourceLoader} from '../createSourceLoader';
-import {createMemorySource} from '../memory-source';
+import {createMemorySource} from '../sources';
 import {createMockDefinitions} from '../__fixtures__';
 import {FailedLoadHandler} from '../types';
 import {createErrorSource} from '../__fixtures__/error-source';

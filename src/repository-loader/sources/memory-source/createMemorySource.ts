@@ -1,5 +1,5 @@
-import {RepositoryDefinition} from '../../repository-definition';
-import {IRepositoryDefinitionSource} from '../types';
+import {RepositoryDefinition} from '../../../repository-definition';
+import {IRepositoryDefinitionSource} from '../../types';
 
 export const createMemorySource = (
   definitions: RepositoryDefinition[]

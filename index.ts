@@ -3,10 +3,10 @@ import {
   createRepositoryLoader,
   FailedLoadHandler,
 } from './src/repository-loader';
-import {createMemorySource} from './src/repository-loader/memory-source';
+import {createMemorySource} from './src/repository-loader/sources';
 import {loggerFactory} from './src/logger';
 import {createMockDefinitions} from './src/repository-loader/__fixtures__';
-import {createYamlSource} from './src/repository-loader/yaml-source';
+import {createYamlSource} from './src/repository-loader/sources';
 
 (async () => {
   const logger = loggerFactory.createLogger();

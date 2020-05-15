@@ -1,4 +1,4 @@
-import {IRepositoryDefinitionSource} from '../types';
+import {IRepositoryDefinitionSource} from '../../types';
 import {asyncGlob} from './asyncGlob';
 import {getRepositoryDefinition} from './getRepositoryDefinition';
 

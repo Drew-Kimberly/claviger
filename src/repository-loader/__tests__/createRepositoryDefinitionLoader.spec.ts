@@ -1,5 +1,5 @@
 import {createRepositoryDefinitionLoader} from '../createRepositoryDefinitionLoader';
-import {createMemorySource} from '../memory-source';
+import {createMemorySource} from '../sources';
 import {createMockDefinitions} from '../__fixtures__';
 import {createDelayedMemorySource} from '../__fixtures__/delayed-memory-source';
 import {

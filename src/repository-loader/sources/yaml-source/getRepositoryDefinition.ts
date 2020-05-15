@@ -1,7 +1,7 @@
 import * as yaml from 'js-yaml';
 import * as util from 'util';
 import * as fs from 'fs';
-import {RepositoryDefinition} from '../../repository-definition';
+import {RepositoryDefinition} from '../../../repository-definition';
 
 const readFileAsync = util.promisify(fs.readFile);
 

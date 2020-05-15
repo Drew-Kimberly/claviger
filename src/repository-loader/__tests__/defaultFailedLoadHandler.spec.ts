@@ -1,5 +1,5 @@
 import {defaultFailedLoadHandler} from '../defaultFailedLoadHandler';
-import {createMemorySource} from '../memory-source';
+import {createMemorySource} from '../sources';
 
 describe('Test suite for defaultFailedLoadHandler', () => {
   test('The handler can be invoked without error', () => {

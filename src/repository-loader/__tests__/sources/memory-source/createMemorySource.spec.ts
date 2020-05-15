@@ -1,5 +1,5 @@
-import {createMemorySource} from '../../memory-source';
-import {createMockDefinitions} from '../../__fixtures__';
+import {createMemorySource} from '../../../sources';
+import {createMockDefinitions} from '../../../__fixtures__';
 
 describe('Test suite for createMemorySource', () => {
   test('The source ID equals "memory-source"', () => {

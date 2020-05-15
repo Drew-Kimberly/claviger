@@ -1,40 +1,11 @@
 import {
-  PackageManagers,
-  RepositoryDefinition,
-} from './src/repository-definition';
-import {
   createRepositoryLoader,
   FailedLoadHandler,
 } from './src/repository-loader';
 import {createMemorySource} from './src/repository-loader/memory-source';
 import {createDelayedMemorySource} from './src/repository-loader/__fixtures__/delayed-memory-source';
-import {createErrorSource} from './src/repository-loader/__fixtures__/error-source';
 import {loggerFactory} from './src/logger';
-
-const createDefinitionFixture = (id: string): RepositoryDefinition => ({
-  id: `repository-${id}`,
-  name: `Repository Fixture ${id}`,
-  packageManager: PackageManagers.NPM,
-  gitRepository: {
-    url: 'testing',
-  },
-  emails: [],
-  securityAlert: {
-    enabled: true,
-  },
-  dependencyReport: {
-    enabled: true,
-  },
-});
-
-const createMockDefinitions = (
-  numDefinitions: number,
-  offset = 0
-): RepositoryDefinition[] => [
-  ...new Array(numDefinitions)
-    .fill(0)
-    .map((val, idx) => createDefinitionFixture((idx + 1 + offset).toString())),
-];
+import {createMockDefinitions} from './src/repository-loader/__fixtures__';
 
 (async () => {
   const logger = loggerFactory.createLogger();

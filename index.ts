@@ -1,26 +1,25 @@
+import * as path from 'path';
 import {
   createRepositoryLoader,
   FailedLoadHandler,
 } from './src/repository-loader';
 import {createMemorySource} from './src/repository-loader/memory-source';
-import {createDelayedMemorySource} from './src/repository-loader/__fixtures__/delayed-memory-source';
 import {loggerFactory} from './src/logger';
 import {createMockDefinitions} from './src/repository-loader/__fixtures__';
+import {createYamlSource} from './src/repository-loader/yaml-source';
 
 (async () => {
   const logger = loggerFactory.createLogger();
 
-  const source1 = createDelayedMemorySource(createMockDefinitions(10));
-  const source2 = createMemorySource(createMockDefinitions(10, 100));
+  const sources = [
+    createMemorySource(createMockDefinitions(10)),
+    createYamlSource(path.join(__dirname, 'repositories')),
+  ];
 
   const onFailedLoad: FailedLoadHandler = (source, e) =>
     logger.error(`An error occurred loading from source ${source.id()}`, e);
-  const repositoryLoader = createRepositoryLoader(
-    [source1, source2],
-    onFailedLoad,
-    {limit: 10}
-  );
 
+  const repositoryLoader = createRepositoryLoader(sources, onFailedLoad);
   repositoryLoader.subscribe(repo => logger.info(repo.id()));
 })();
 

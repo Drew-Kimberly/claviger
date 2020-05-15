@@ -1,1 +1,1 @@
-export * from './createMemorySource';
+export {createMemorySource} from './createMemorySource';

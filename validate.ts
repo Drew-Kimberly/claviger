@@ -1,48 +1,33 @@
-// import * as path from 'path';
-// import {validateRepositoryDefinition} from './src/repository-definition/validation';
-// import {getRepositoryDefinitions} from './src/repository-definition';
-// import {RepositoryDefinition} from './src/repository-definition';
-//
-// const validateRepositoryName = (repositoryDefinitionPath: string): boolean =>
-//   repositoryDefinitionPath.match(/.+\.repository\.ya?ml/) !== null;
-//
-// (async () => {
-//   const repositories = await getRepositoryDefinitions(
-//     path.join(__dirname, 'repositories')
-//   );
-//
-//   const validations = repositories.map((repo: RepositoryDefinition) => {
-//     return new Promise((resolve, reject) => {
-//       if (!validateRepositoryName(repo.repositoryDefinitionPath)) {
-//         return reject(
-//           new Error(
-//             `Invalid repository path ${repo.repositoryDefinitionPath}! Repository config files should be of the form /path/to/claviger/repositories/custom/path/{{repoId}}.repository.yml`
-//           )
-//         );
-//       }
-//
-//       validateRepositoryDefinition(repo).then(errors => {
-//         if (errors.length > 0) {
-//           errors.forEach(error => console.error('Validation error:', error));
-//           return reject(
-//             new Error(
-//               `Repository ${repo.id} found at path ${repo.repositoryDefinitionPath} failed Claviger Repository schema validation.`
-//             )
-//           );
-//         }
-//
-//         return resolve();
-//       });
-//     });
-//   });
-//
-//   try {
-//     await Promise.all(validations);
-//   } catch (e) {
-//     console.error(e);
-//     // eslint-disable-next-line no-process-exit
-//     process.exit(1);
-//   }
-//
-//   console.log('Validation passed!');
-// })();
+import * as path from 'path';
+import {validateRepositoryDefinition} from './src/repository-definition/validation';
+import {
+  createRepositoryDefinitionLoader,
+  FailedLoadHandler,
+} from './src/repository-loader';
+import {createYamlSource} from './src/repository-loader/sources';
+import {loggerFactory} from './src/logger';
+
+(async () => {
+  const logger = loggerFactory.createLogger();
+
+  const onFailedLoad: FailedLoadHandler = (source, e) =>
+    logger.error(`An error occurred loading from source ${source.id()}`, e);
+
+  const repositoryLoader = createRepositoryDefinitionLoader(
+    [createYamlSource(path.join(__dirname, 'repositories'))],
+    onFailedLoad
+  );
+
+  repositoryLoader.subscribe(async definition => {
+    const validationResults = await validateRepositoryDefinition(definition);
+
+    if (validationResults.length > 0) {
+      validationResults.forEach(error =>
+        logger.error('Validation error:', error)
+      );
+      throw new Error(
+        `Repository ${definition.id} failed Claviger Repository schema validation.`
+      );
+    }
+  });
+})();

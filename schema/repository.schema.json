@@ -3,7 +3,7 @@
   "$id": "repository.schema.json",
   "type": "object",
   "title": "Repository JSON Schema",
-  "description": "Defines the schema for a repository config that enables integration with Upkeep.",
+  "description": "Defines the schema for a repository config that enables integration with Claviger.",
   "required": [
     "id",
     "name",

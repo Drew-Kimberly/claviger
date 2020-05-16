@@ -1,7 +1,7 @@
 {
-  "name": "@drewkimberly/upkeep",
+  "name": "@drewkimberly/claviger",
   "version": "0.0.0",
-  "description": "Configurable reporting on repository dependencies",
+  "description": "Configurable integrations to help maintain repository dependencies",
   "main": "index.js",
   "types": "build/index.d.ts",
   "files": [
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Drew-Kimberly/upkeep.git"
+    "url": "git@github.com:Drew-Kimberly/claviger.git"
   },
   "author": "Drew Kimberly",
   "license": "MIT",

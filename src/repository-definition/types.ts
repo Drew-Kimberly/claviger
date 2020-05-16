@@ -10,7 +10,7 @@ export enum SecurityVulnerabilitySeverities {
   Critical = 'critical',
 }
 
-// See: /path/to/upkeep/schema/repository.schema.json
+// See: /path/to/claviger/schema/repository.schema.json
 export interface RepositoryDefinition {
   id: string;
   name: string;

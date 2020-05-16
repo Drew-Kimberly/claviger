@@ -16,7 +16,7 @@
 //       if (!validateRepositoryName(repo.repositoryDefinitionPath)) {
 //         return reject(
 //           new Error(
-//             `Invalid repository path ${repo.repositoryDefinitionPath}! Repository config files should be of the form /path/to/upkeep/repositories/custom/path/{{repoId}}.repository.yml`
+//             `Invalid repository path ${repo.repositoryDefinitionPath}! Repository config files should be of the form /path/to/claviger/repositories/custom/path/{{repoId}}.repository.yml`
 //           )
 //         );
 //       }
@@ -26,7 +26,7 @@
 //           errors.forEach(error => console.error('Validation error:', error));
 //           return reject(
 //             new Error(
-//               `Repository ${repo.id} found at path ${repo.repositoryDefinitionPath} failed Upkeep Repository schema validation.`
+//               `Repository ${repo.id} found at path ${repo.repositoryDefinitionPath} failed Claviger Repository schema validation.`
 //             )
 //           );
 //         }

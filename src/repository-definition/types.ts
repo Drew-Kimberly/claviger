@@ -19,7 +19,6 @@ export interface RepositoryDefinition {
   emails: string[];
   securityAlert: SecurityAlert;
   dependencyReport: DependencyReport;
-  repositoryDefinitionPath: string;
 }
 
 export interface GitRepo {

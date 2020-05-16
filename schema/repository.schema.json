@@ -5,6 +5,7 @@
   "title": "Repository JSON Schema",
   "description": "Defines the schema for a repository config that enables integration with Upkeep.",
   "required": [
+    "id",
     "name",
     "gitRepository",
     "packageManager",
@@ -13,6 +14,11 @@
     "dependencyReport"
   ],
   "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "title": "The ID of the repository"
+    },
     "name": {
       "$id": "#/properties/name",
       "type": "string",

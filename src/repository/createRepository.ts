@@ -5,11 +5,10 @@ import {
 } from '../repository-definition';
 
 const DEFAULT_BRANCH = 'master';
-const CLONE_DEPTH = 1;
+const DEFAULT_MIN_SEVERITY = SecurityVulnerabilitySeverities.High;
 
 export const createRepository: RepositoryFactory = (
-  definition: RepositoryDefinition,
-  destination: string
+  definition: RepositoryDefinition
 ): IRepository => {
   return {
     getDefinition: () => definition,
@@ -22,25 +21,20 @@ export const createRepository: RepositoryFactory = (
 
     getEmails: () => definition.emails,
 
+    getGitRepoUrl: () => definition.gitRepository.url,
+
+    getGitRepoRef: () => definition.gitRepository.ref ?? DEFAULT_BRANCH,
+
     isMonorepo: () => Boolean(definition.gitRepository.isMonorepo),
 
     isSecurityAlertEnabled: () => definition.securityAlert.enabled,
 
     securityAlertMinSeverity: () =>
-      definition.securityAlert.minSeverity ??
-      SecurityVulnerabilitySeverities.High,
+      definition.securityAlert.minSeverity ?? DEFAULT_MIN_SEVERITY,
 
     isDependencyReportEnabled: () => definition.dependencyReport.enabled,
 
     includeSecurityOverviewInDependencyReport: () =>
       Boolean(definition.dependencyReport.includeSecurityOverview),
-
-    gitUrl: () => definition.gitRepository.url,
-
-    gitBranch: () => definition.gitRepository.ref ?? DEFAULT_BRANCH,
-
-    cloneDepth: () => CLONE_DEPTH,
-
-    cloneDestination: () => `${destination}${definition.id}`,
   };
 };

@@ -26,7 +26,8 @@
   "license": "MIT",
   "dependencies": {
     "glob": "^7.1.6",
-    "js-yaml": "^3.13.1"
+    "js-yaml": "^3.13.1",
+    "rxjs": "^6.5.5"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",

@@ -4,4 +4,12 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
+  collectCoverageFrom: [
+    '**/*.ts',
+    '!**/node_modules/**',
+    '!**/index.ts',
+    '!**/types.ts',
+    '!**/__fixtures__/**',
+    '!**/__mocks__/**',
+  ],
 };

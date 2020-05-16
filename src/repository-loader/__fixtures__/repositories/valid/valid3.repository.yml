@@ -1,0 +1,14 @@
+id: valid-3
+name: Test Repo 3
+packageManager: npm
+
+gitRepository:
+  url: testing
+
+emails: []
+
+securityAlert:
+  enabled: true
+
+dependencyReport:
+  enabled: true

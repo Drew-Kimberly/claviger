@@ -8,6 +8,6 @@ export const asyncGlob = (pattern: string): Promise<string[]> => {
       return resolve(matches);
     };
 
-    glob(pattern, callback);
+    glob(pattern, {strict: true}, callback);
   });
 };

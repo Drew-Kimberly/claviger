@@ -3,14 +3,15 @@ import {
   RepositoryDefinition,
   SecurityVulnerabilitySeverities,
 } from '../repository-definition';
-import {ICloneable} from '../git';
 
-export interface IRepository extends ICloneable {
+export interface IRepository {
   getDefinition(): RepositoryDefinition;
   id(): string;
   name(): string;
   getPackageManager(): PackageManagers;
   getEmails(): string[];
+  getGitRepoUrl(): string;
+  getGitRepoRef(): string;
   isMonorepo(): boolean;
   isSecurityAlertEnabled(): boolean;
   securityAlertMinSeverity(): SecurityVulnerabilitySeverities;

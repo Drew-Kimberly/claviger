@@ -1,0 +1,16 @@
+id: claviger
+name: Claviger
+packageManager: npm
+
+gitRepository:
+  url: "https://github.com/Drew-Kimberly/claviger"
+  ref: develop
+
+emails:
+  - andrew.e.kimberly@gmail.com
+
+securityAlert:
+  enabled: true
+
+dependencyReport:
+  enabled: true

@@ -1,0 +1,15 @@
+id: claviger-example
+name: Claviger Example
+packageManager: npm
+
+gitRepository:
+  url: "https://github.com/Drew-Kimberly/claviger-example"
+
+emails:
+  - andrew.e.kimberly@gmail.com
+
+securityAlert:
+  enabled: true
+
+dependencyReport:
+  enabled: true

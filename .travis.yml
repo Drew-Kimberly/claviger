@@ -26,5 +26,3 @@ jobs:
       script: npm run check
     - script: npm run test:coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
       name: "Unit Test"
-    - script: npm run compile && npm run validate
-      name: "Validate Repository Definitions"

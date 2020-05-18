@@ -2,7 +2,7 @@
   "name": "@drewkimberly/claviger",
   "version": "0.0.0",
   "description": "Configurable integrations to help maintain repository dependencies",
-  "main": "index.js",
+  "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
     "build"
@@ -27,7 +27,8 @@
   "dependencies": {
     "glob": "^7.1.6",
     "js-yaml": "^3.13.1",
-    "rxjs": "^6.5.5"
+    "rxjs": "^6.5.5",
+    "uuidv4": "^6.0.8"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",

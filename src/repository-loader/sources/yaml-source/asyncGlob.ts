@@ -1,4 +1,4 @@
-import * as glob from 'glob';
+import glob from 'glob';
 
 export const asyncGlob = (pattern: string): Promise<string[]> => {
   return new Promise((resolve, reject) => {

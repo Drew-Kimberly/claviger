@@ -4,23 +4,39 @@ import {
   FailedLoadHandler,
 } from './src/repository-loader';
 import {createMemorySource} from './src/repository-loader/sources';
-import {loggerFactory} from './src/logger';
+import {createLoggerFactory, loggerFactory, nullWriter} from './src/logger';
 import {createMockDefinitions} from './src/repository-loader/__fixtures__';
 import {createYamlSource} from './src/repository-loader/sources';
+import {filter, map} from 'rxjs/operators';
+import {createSecurityAlertTaskProducer} from './src/repository-task/tasks/security-alert';
+import {createDependencyReportTaskProducer} from './src/repository-task/tasks/dependency-report';
+import {isDefined} from './src/util';
+import {createRepositoryTaskLoader} from './src/repository-task/createRepositoryTaskLoader';
 
 (async () => {
   const logger = loggerFactory.createLogger();
 
   const sources = [
-    createMemorySource(createMockDefinitions(10)),
-    createYamlSource(path.join(__dirname, 'repositories')),
+    // createMemorySource(createMockDefinitions(10)),
+    createYamlSource(path.join(__dirname, 'repositories'), loggerFactory),
   ];
 
   const onFailedLoad: FailedLoadHandler = (source, e) =>
     logger.error(`An error occurred loading from source ${source.id()}`, e);
 
   const repositoryLoader = createRepositoryLoader(sources, onFailedLoad);
-  repositoryLoader.subscribe(repo => logger.info(repo.id()));
+
+  const taskLoader = createRepositoryTaskLoader(
+    createDependencyReportTaskProducer(loggerFactory),
+    repositoryLoader
+  );
+
+  // const taskLoader = createRepositoryTaskLoader(
+  //   createSecurityAlertTaskProducer(loggerFactory),
+  //   repositoryLoader
+  // );
+
+  taskLoader.subscribe(task => logger.info(task.uuid));
 })();
 
 // Security alert.
@@ -57,5 +73,3 @@ import {createYamlSource} from './src/repository-loader/sources';
 //     }
 //   }
 // })();
-
-export * from './src';

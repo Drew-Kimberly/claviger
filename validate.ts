@@ -1,11 +1,11 @@
-import * as path from 'path';
+import path from 'path';
 import {validateRepositoryDefinition} from './src/repository-definition/validation';
 import {
   createRepositoryDefinitionLoader,
   FailedLoadHandler,
 } from './src/repository-loader';
 import {createYamlSource} from './src/repository-loader/sources';
-import {loggerFactory} from './src/logger';
+import {createLoggerFactory, loggerFactory, nullWriter} from './src/logger';
 
 (async () => {
   const logger = loggerFactory.createLogger();
@@ -14,7 +14,12 @@ import {loggerFactory} from './src/logger';
     logger.error(`An error occurred loading from source ${source.id()}`, e);
 
   const repositoryLoader = createRepositoryDefinitionLoader(
-    [createYamlSource(path.join(__dirname, 'repositories'))],
+    [
+      createYamlSource(
+        path.join(__dirname, 'repositories'),
+        createLoggerFactory(nullWriter)
+      ),
+    ],
     onFailedLoad
   );
 

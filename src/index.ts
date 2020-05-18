@@ -4,4 +4,5 @@ export * from './logger';
 export * from './repository';
 export * from './repository-definition';
 export * from './repository-loader';
+export * from './repository-task';
 export * from './util';
